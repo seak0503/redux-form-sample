@@ -1,0 +1,78 @@
+// multi-select item
+$select-item-color:                 #FFFFFF;
+$select-item-bg:                    #191919;
+//$select-input-height:               28px;
+
+@import "~react-select/scss/select";
+@import "~react-select/scss/control";
+@import "~react-select/scss/menu";
+@import "~react-select/scss/multi";
+@import "~react-select/scss/spinner";
+
+//.Select-input {
+//  height: 28px;
+//}
+//
+//// Control
+//.Select-control {
+//  border-radius: 0;
+//  border: none;
+//  height: 28px;
+//}
+//
+//.Select-arrow-zone {
+//  padding-right: ($select-arrow-width - 5);
+//}
+//
+////.has-value.Select--single > .Select-control .Select-value,
+////.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value {
+////  .Select-value-label {
+////    font-size: 7px;
+////  }
+////}
+//
+//// Multi-Select
+//.Select--multi {
+//  .Select-value {
+//    border: none;
+//    margin-left: ($select-item-gutter - 2);
+//    margin-top: ($select-item-gutter - 2);
+//  }
+//  .Select-value-label {
+//    padding: $select-item-padding-vertical ($select-item-padding-horizontal - 2 ) $select-item-padding-vertical;
+//    display: inline;
+//  }
+//  .Select-value-icon {
+//    border-right: none;
+//    display: inline-block;
+//    padding: ($select-item-padding-vertical - 1) ($select-item-padding-horizontal - 5 ) ($select-item-padding-vertical + 1) ($select-item-padding-horizontal - 2);
+//  }
+//}
+//
+//// Select Menu
+//.Select-menu-outer {
+//  border-radius: 0;
+//  color: #333333;
+//  width: 500px;
+//}
+//.nameHeader {
+//  background-color: #eee;
+//  font-weight: bold;
+//  font-size: .85;
+//}
+//.nameOptionFocused {
+//  background-color: #f0d5d5;
+//  cursor: pointer;
+//}
+//.otionRenderer {
+//  padding: 10px;
+//}
+//
+//.Select-option {
+//  color: #333;
+//}
+//
+//.Select-option.is-focused {
+//  background-color: #f0d5d5;
+//}
+
