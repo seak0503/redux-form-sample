@@ -23,6 +23,10 @@ const myValidation = values => {
   if (!values.program) {
     errors.program = '選択してください'
   }
+
+  if (!values.favoriteColor) {
+    errors.favoriteColor = '選択してください'
+  }
   return errors;
 }
 
@@ -40,6 +44,20 @@ const renderField = ({ input, label, type, placeholder, meta: {touched, error, w
     </FormGroup>
   );
 }
+
+const renderSelect = ({ input, label, meta: {touched, error}, children }) => {
+  return (
+    <div className="field">
+      <label className="label">{label}</label>
+      <div className={'select ' + (touched ? (error ? 'is-danger' : 'is-success') : '')}>
+        <select {...input}>
+          {children}
+        </select>
+      </div>
+      {touched && (error && <p className="help is-danger">{error}</p>)}
+    </div>
+  );
+};
 
 const selectField =
   ({
@@ -111,6 +129,17 @@ const MyForm = props => {
         backspaceRemoves={true}
         clearable={true}
       />
+      <div>
+        <label>Favorite Color</label>
+        <div>
+          <Field name="favoriteColor" component={renderSelect}>
+            <option></option>
+            <option value="ff0000">Red</option>
+            <option value="00ff00">Green</option>
+            <option value="0000ff">Blue</option>
+          </Field>
+        </div>
+      </div>
       <Field
         name="tel"
         component={renderField}
