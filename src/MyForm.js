@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import {
   Form,
   FormGroup,
+  FormControl,
   Col,
   ControlLabel,
   Button,
@@ -23,7 +24,7 @@ const renderField = ({ input, label, type, placeholder, meta: {touched, error, w
     <FormGroup controlId={input.name} validationState={touched ? validationState: null}>
       <Col componentClass={ControlLabel} sm={2}>{label}</Col>
       <Col sm={5}>
-        <input {...input} id={input.name} placeholder={placeholder} type={type} className={'form-control'} />
+        <FormControl {...input} id={input.name} placeholder={placeholder} type={type} />
         {
           touched && error && <HelpBlock>{error}</HelpBlock>
         }
