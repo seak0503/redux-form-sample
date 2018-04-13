@@ -12,24 +12,8 @@ import {
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-const myValidation = values => {
-  console.log("valuesは", values)
-  const errors = {};
-  if (!values.name) {
-    errors.name = '必須項目です!'
-  } else if (values.name.length > 10) {
-    errors.name = '10文字以内で指定してください'
-  }
-
-  if (!values.program) {
-    errors.program = '選択してください'
-  }
-
-  if (!values.favoriteColor) {
-    errors.favoriteColor = '選択してください'
-  }
-  return errors;
-}
+const inputRequired = value => (value ? undefined : '入力してください');
+const selectRequired = value => (value ? undefined : ' 選択してください');
 
 const renderField = ({ input, label, type, placeholder, meta: {touched, error, warning} }) => {
   console.log("renderFieldのerrorは", error)
@@ -46,20 +30,6 @@ const renderField = ({ input, label, type, placeholder, meta: {touched, error, w
     </FormGroup>
   );
 }
-
-const renderSelect = ({ input, label, meta: {touched, error}, children }) => {
-  return (
-    <div className="field">
-      <label className="label">{label}</label>
-      <div className={'select ' + (touched ? (error ? 'is-danger' : 'is-success') : '')}>
-        <select {...input}>
-          {children}
-        </select>
-      </div>
-      {touched && (error && <p className="help is-danger">{error}</p>)}
-    </div>
-  );
-};
 
 class SelectField extends React.Component {
   constructor(props) {
@@ -130,6 +100,7 @@ const MyForm = props => {
         type="text"
         label="お名前"
         placeholder="Name"
+        validate={inputRequired}
       />
       <Field
         name="program"
@@ -142,24 +113,15 @@ const MyForm = props => {
         ignoreCase={true}
         backspaceRemoves={true}
         clearable={true}
+        validate={selectRequired}
       />
-      <div>
-        <label>Favorite Color</label>
-        <div>
-          <Field name="favoriteColor" component={renderSelect}>
-            <option></option>
-            <option value="ff0000">Red</option>
-            <option value="00ff00">Green</option>
-            <option value="0000ff">Blue</option>
-          </Field>
-        </div>
-      </div>
       <Field
         name="tel"
         component={renderField}
         type="text"
         label="電話番号"
         placeholder="Tel"
+        validate={inputRequired}
       />
       <Col smOffset={2} sm={5}>
         <ButtonToolbar>
@@ -173,5 +135,4 @@ const MyForm = props => {
 
 export default reduxForm({
   form: 'myForm',
-  validate: myValidation,
 })(MyForm);
