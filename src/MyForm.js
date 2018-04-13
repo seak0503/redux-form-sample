@@ -13,6 +13,7 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 const myValidation = values => {
+  console.log("valuesは", values)
   const errors = {};
   if (!values.name) {
     errors.name = '必須項目です!'
@@ -31,6 +32,7 @@ const myValidation = values => {
 }
 
 const renderField = ({ input, label, type, placeholder, meta: {touched, error, warning} }) => {
+  console.log("renderFieldのerrorは", error)
   const validationState = error ? 'error' : warning ? 'warning' : 'success';
   return(
     <FormGroup controlId={input.name} validationState={touched ? validationState: null}>
@@ -59,22 +61,32 @@ const renderSelect = ({ input, label, meta: {touched, error}, children }) => {
   );
 };
 
-const selectField =
-  ({
-    input,
-    label,
-    options,
-    labelKey,
-    valueKey,
-    placeholder,
-    ignoreCase,
-    backspaceRemoves,
-    clearable,
-    meta: {touched, error, warning}
-  }) => {
+class SelectField extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      touched: false
+    }
+  }
+
+  render() {
+    const {
+      input,
+      label,
+      options,
+      labelKey,
+      valueKey,
+      placeholder,
+      ignoreCase,
+      backspaceRemoves,
+      clearable,
+      meta: {error, warning}
+    } = this.props;
+
     const validationState = error ? 'error' : warning ? 'warning' : 'success';
+
     return(
-      <FormGroup controlId={input.name} validationState={touched ? validationState : null}>
+      <FormGroup controlId={input.name} validationState={this.state.touched ? validationState : null}>
         <Col componentClass={ControlLabel} sm={2}>{label}</Col>
         <Col sm={5}>
           <Select
@@ -89,14 +101,16 @@ const selectField =
             backspaceRemoves={backspaceRemoves}
             clearable={clearable}
             noResultsText="一致する結果がありません"
+            onBlur={(e) => this.setState({touched: true})}
           />
           {
-            touched && error && <HelpBlock>{error}</HelpBlock>
+            this.state.touched && error && <HelpBlock>{error}</HelpBlock>
           }
         </Col>
       </FormGroup>
     );
   }
+}
 
 
 const MyForm = props => {
@@ -119,7 +133,7 @@ const MyForm = props => {
       />
       <Field
         name="program"
-        component={selectField}
+        component={SelectField}
         label="プログラム"
         options={options}
         labelKey="name"
