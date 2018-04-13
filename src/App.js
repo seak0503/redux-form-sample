@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import showResults from './showResults';
+//import showResults from './showResults';
 import MyForm from './MyForm';
 import {
   Grid,
@@ -21,7 +21,7 @@ class App extends Component {
           <Row>
             <Col sm={10}>
               <h3>フォーム画面</h3>
-              <MyForm onSubmit={showResults}/>
+              <MyForm/>
             </Col>
           </Row>
         </Grid>

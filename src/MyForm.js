@@ -11,12 +11,13 @@ import {
 } from 'react-bootstrap';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import submit from './submit';
 
 const inputRequired = value => (value ? undefined : '入力してください');
 const selectRequired = value => (value ? undefined : ' 選択してください');
 
 const renderField = ({ input, label, type, placeholder, meta: {touched, error, warning} }) => {
-  console.log("renderFieldのerrorは", error)
+  console.log("renderFieldのtouchedは", touched)
   const validationState = error ? 'error' : warning ? 'warning' : 'success';
   return(
     <FormGroup controlId={input.name} validationState={touched ? validationState: null}>
@@ -39,7 +40,14 @@ class SelectField extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.meta.touched) {
+      this.setState({touched: true})
+    }
+  }
+
   render() {
+    console.log("selectのtouchedは", this.props.meta.touched)
     const {
       input,
       label,
@@ -93,7 +101,7 @@ const MyForm = props => {
   ];
 
   return(
-    <Form horizontal onSubmit={handleSubmit}>
+    <Form horizontal onSubmit={handleSubmit(submit)}>
       <Field
         name="name"
         component={renderField}
